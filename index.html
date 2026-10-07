@@ -12,8 +12,7 @@
     width: 100%;
     height: 100vh;
     margin: 0;
-    padding: 10px;
-    overflow: hidden; /* 全体スクロール防止 */
+    padding: 8px;
     font-family: "Hiragino Maru Gothic Pro", "Meiryo UI", "Yu Gothic", sans-serif;
     background-color: #f0f7ff;
     color: #222;
@@ -21,12 +20,12 @@
     -webkit-user-select: none;
   }
 
-  /* アプリコンテナ */
+  /* アプリ基本構造 */
   .app-container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    gap: 10px;
+    gap: 8px;
   }
 
   /* ① ヘッダーコントロール */
@@ -35,24 +34,26 @@
     justify-content: space-between;
     align-items: center;
     background: #ffffff;
-    padding: 8px 16px;
-    border-radius: 14px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    padding: 8px 14px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     border: 2px solid #d0e3ff;
     flex-shrink: 0;
+    gap: 8px;
+    flex-wrap: wrap;
   }
   .control-group {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 16px;
+    gap: 6px;
+    font-size: 15px;
     font-weight: bold;
     color: #333;
   }
   select {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 8px;
     border: 2px solid #64b5f6;
     background-color: #fff;
@@ -60,40 +61,110 @@
     outline: none;
   }
 
-  /* ② メインエリア */
+  /* ② メインコンテンツエリア */
   .main-content {
     display: flex;
     flex: 1;
-    gap: 12px;
+    gap: 10px;
     min-height: 0;
   }
 
-  /* 左パネル */
-  .left-panel {
-    width: 330px;
-    flex-shrink: 0;
+  /* ========================================================
+     🖼️ 【よこがめん】(左右2カラム・1画面フィット)
+     ======================================================== */
+  .main-content.layout-landscape {
+    flex-direction: row !important;
+    overflow: hidden !important;
+  }
+  .main-content.layout-landscape .left-panel {
+    width: 320px !important;
+    flex-shrink: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .main-content.layout-landscape .right-panel {
+    flex: 1 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+  .main-content.layout-landscape .shop-card {
+    flex-direction: column !important;
+    padding: 10px;
+  }
+  .main-content.layout-landscape #item-name {
+    font-size: 30px !important;
+  }
+  .main-content.layout-landscape #item-price {
+    font-size: 26px !important;
+  }
+  .main-content.layout-landscape #item-price-box {
+    width: 100% !important;
+  }
+  .main-content.layout-landscape .coin-100 { width: 64px !important; height: 64px !important; }
+  .main-content.layout-landscape .coin-10 { width: 60px !important; height: 60px !important; }
+  .main-content.layout-landscape .coin-1 { width: 54px !important; height: 54px !important; }
+
+  /* ========================================================
+     📱 【たてがめん】(上下1カラム・縦持ち用)
+     ======================================================== */
+  .main-content.layout-portrait {
+    flex-direction: column !important;
+    overflow-y: auto !important; /* 縦長コンテンツをスクロール表示可能に */
+    padding-right: 4px;
+  }
+  .main-content.layout-portrait .left-panel {
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .main-content.layout-portrait .shop-card {
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    padding: 8px 12px !important;
+  }
+  .main-content.layout-portrait #item-name {
+    font-size: 26px !important;
+  }
+  .main-content.layout-portrait #item-price {
+    font-size: 24px !important;
+  }
+  .main-content.layout-portrait #item-price-box {
+    width: auto !important;
+  }
+  .main-content.layout-portrait .right-panel {
+    width: 100% !important;
+    flex: none !important;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    justify-content: space-between;
   }
+  .main-content.layout-portrait .area-box {
+    min-height: 160px !important;
+  }
+  .main-content.layout-portrait .coin-100 { width: 56px !important; height: 56px !important; }
+  .main-content.layout-portrait .coin-10 { width: 52px !important; height: 52px !important; }
+  .main-content.layout-portrait .coin-1 { width: 46px !important; height: 46px !important; }
 
-  /* しょうひんカード */
+  /* 商品カード基本構造 */
   .shop-card {
     background: linear-gradient(135deg, #ffffff 0%, #fff0f3 100%);
-    border: 4px solid #ff8fa3;
-    border-radius: 18px;
-    padding: 12px;
+    border: 3px solid #ff8fa3;
+    border-radius: 16px;
+    padding: 10px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(255, 143, 163, 0.2);
+    box-shadow: 0 3px 8px rgba(255, 143, 163, 0.2);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
   }
   #item-name {
-    font-size: 32px;
     font-weight: bold;
     color: #222;
     line-height: 1.2;
@@ -101,12 +172,10 @@
   #item-price-box {
     background: #ffe3e8;
     border: 2px dashed #ff4d6d;
-    padding: 4px 14px;
-    border-radius: 12px;
-    width: 100%;
+    padding: 4px 12px;
+    border-radius: 10px;
   }
   #item-price {
-    font-size: 28px;
     font-weight: 900;
     color: #d90429;
   }
@@ -115,21 +184,21 @@
   .action-card {
     background: #ffffff;
     border: 3px solid #d0e3ff;
-    border-radius: 18px;
-    padding: 12px;
+    border-radius: 16px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     flex: 1;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.04);
   }
 
   #message {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
-    min-height: 48px;
+    min-height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,16 +206,16 @@
     line-height: 1.3;
   }
 
-  /* おつり表示エリア */
+  /* おつり表示 */
   .change-result-box {
     display: none;
     background: #fff8e1;
-    border: 3px solid #ffb300;
-    border-radius: 14px;
-    padding: 6px 12px;
+    border: 2px solid #ffb300;
+    border-radius: 12px;
+    padding: 6px 10px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 3px 8px rgba(255, 179, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(255, 179, 0, 0.2);
     animation: popIn 0.3s ease-out;
   }
   @keyframes popIn {
@@ -154,12 +223,12 @@
     100% { transform: scale(1); opacity: 1; }
   }
   .change-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     color: #b78103;
   }
   .change-amount {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 900;
     color: #e65100;
   }
@@ -168,95 +237,87 @@
   .button-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
   }
 
   .btn-pay {
     background: linear-gradient(180deg, #ff7043 0%, #f4511e 100%);
     color: white;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 10px 18px;
     width: 100%;
     border: none;
-    border-radius: 14px;
-    box-shadow: 0 5px 0 #bf360c, 0 6px 12px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    box-shadow: 0 4px 0 #bf360c, 0 4px 8px rgba(0,0,0,0.15);
     cursor: pointer;
     transition: all 0.1s ease;
   }
   .btn-pay:active {
     box-shadow: 0 0 0 #bf360c, 0 2px 4px rgba(0,0,0,0.15);
-    transform: translateY(5px);
+    transform: translateY(4px);
   }
 
   .btn-retry {
     background: linear-gradient(180deg, #ffca28 0%, #ffa000 100%);
     color: #333;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    padding: 10px 16px;
+    padding: 8px 14px;
     width: 100%;
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 0 #c77800;
+    border-radius: 10px;
+    box-shadow: 0 3px 0 #c77800;
     cursor: pointer;
     display: none;
   }
   .btn-retry:active {
     box-shadow: 0 0 0 #c77800;
-    transform: translateY(4px);
+    transform: translateY(3px);
   }
 
   .btn-next {
     background: linear-gradient(180deg, #66bb6a 0%, #43a047 100%);
     color: white;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 10px 18px;
     width: 100%;
     border: none;
-    border-radius: 14px;
-    box-shadow: 0 5px 0 #1b5e20, 0 6px 12px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    box-shadow: 0 4px 0 #1b5e20, 0 4px 8px rgba(0,0,0,0.15);
     cursor: pointer;
     display: none;
   }
   .btn-next:active {
     box-shadow: 0 0 0 #1b5e20, 0 2px 4px rgba(0,0,0,0.15);
-    transform: translateY(5px);
+    transform: translateY(4px);
   }
 
-  /* 右パネル */
-  .right-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-width: 0;
-  }
-
+  /* エリアボックス基本 */
   .area-box {
     flex: 1;
     display: flex;
     flex-direction: column;
-    border-radius: 18px;
-    padding: 10px 14px;
+    border-radius: 16px;
+    padding: 8px 12px;
     min-height: 0;
   }
 
   .tray-box {
     background: #eafaf1;
-    border: 4px dashed #52be80;
+    border: 3px dashed #52be80;
   }
   .wallet-box {
     background: #fef9e7;
-    border: 4px solid #f5b041;
+    border: 3px solid #f5b041;
   }
 
   .area-header {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -265,38 +326,37 @@
   .badge {
     background: #27ae60;
     color: white;
-    padding: 3px 12px;
-    border-radius: 16px;
-    font-size: 18px;
+    padding: 2px 10px;
+    border-radius: 14px;
+    font-size: 16px;
   }
 
   .tray-container-display {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     overflow-y: auto;
     padding: 2px;
   }
   .denom-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 6px 10px;
-    border-radius: 12px;
+    gap: 3px;
+    background: rgba(255, 255, 255, 0.65);
+    padding: 4px 8px;
+    border-radius: 10px;
     border: 1px solid #c8e6c9;
   }
   .denom-label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     color: #2e7d32;
-    margin-bottom: 2px;
   }
   .coin-row-5 {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
   }
 
@@ -306,43 +366,34 @@
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 8px;
     overflow-y: auto;
-    padding: 4px;
+    padding: 2px;
   }
 
   /* 硬貨デザイン */
   .coin {
     border-radius: 50%;
     cursor: pointer;
-    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25));
-    transition: transform 0.1s ease, filter 0.1s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+    transition: transform 0.1s ease;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     flex-shrink: 0;
   }
-  .coin:hover {
-    transform: translateY(-2px) scale(1.05);
-  }
   .coin:active {
-    transform: scale(0.92);
+    transform: scale(0.9);
   }
 
   .coin-100 {
     background-image: url('coin100.png');
-    width: 66px;
-    height: 66px;
   }
   .coin-10 {
     background-image: url('coin10.png');
-    width: 62px;
-    height: 62px;
   }
   .coin-1 {
     background-image: url('coin1.png');
-    width: 56px;
-    height: 56px;
   }
 </style>
 </head>
@@ -369,10 +420,18 @@
           <option value="5">れべる 5</option>
         </select>
       </div>
+
+      <div class="control-group">
+        <span>がめん:</span>
+        <select id="layout-select" onchange="applyLayout()">
+          <option value="landscape">↔️ よこがめん (左右)</option>
+          <option value="portrait">↕️ たてがめん (上下)</option>
+        </select>
+      </div>
     </div>
 
     <!-- メインコンテンツ -->
-    <div class="main-content">
+    <div class="main-content layout-landscape" id="main-content">
       
       <!-- 左パネル -->
       <div class="left-panel">
@@ -426,8 +485,8 @@
 <script>
   let currentPrice = 0;
   let targetPayment = 0;
-  let trayCoinsList = [];   // トレイ内の硬貨 [{id, value}]
-  let walletCoinsList = []; // 財布内の硬貨 [{id, value}]
+  let trayCoinsList = [];   
+  let walletCoinsList = []; 
   let coinIdCounter = 0;
 
   const items = [
@@ -456,7 +515,6 @@
     gain.connect(audioCtx.destination);
     
     if (type === 'correct') {
-      // ぴったり正解（ミ・ラ ファンファーレ）
       osc.type = 'sine';
       osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
       osc.frequency.setValueAtTime(880.00, audioCtx.currentTime + 0.15);
@@ -465,16 +523,14 @@
       osc.start(audioCtx.currentTime);
       osc.stop(audioCtx.currentTime + 0.5);
     } else if (type === 'good') {
-      // お買い物成立（マイルドな成功音）
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // ド
-      osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.15); // ミ
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.15);
       gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
       osc.start(audioCtx.currentTime);
       osc.stop(audioCtx.currentTime + 0.4);
     } else {
-      // 不足（ブブー）
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(150, audioCtx.currentTime);
       gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
@@ -486,6 +542,20 @@
 
   function getRand(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // 画面レイアウトの適用関数
+  function applyLayout() {
+    const layout = document.getElementById('layout-select').value;
+    const mainContent = document.getElementById('main-content');
+
+    if (layout === 'portrait') {
+      mainContent.classList.remove('layout-landscape');
+      mainContent.classList.add('layout-portrait');
+    } else {
+      mainContent.classList.remove('layout-portrait');
+      mainContent.classList.add('layout-landscape');
+    }
   }
 
   function startNewProblem() {
@@ -613,6 +683,7 @@
     walletCoinsList = coins.map(val => ({ id: ++coinIdCounter, value: val }));
 
     renderUI();
+    applyLayout();
   }
 
   function renderUI() {
@@ -697,7 +768,6 @@
     document.getElementById('btn-next').style.display = 'none';
   }
 
-  // 再チャレンジ時のトレイリセット機能
   function resetPaymentForRetry() {
     document.getElementById('message').textContent = '';
     document.getElementById('change-result-box').style.display = 'none';
@@ -706,25 +776,22 @@
     document.getElementById('btn-next').style.display = 'none';
   }
 
-  // 判定ロジック
   function checkPayment() {
     let total = trayCoinsList.reduce((sum, c) => sum + c.value, 0);
     const mode = document.getElementById('mode-select').value;
 
     if (total < currentPrice) {
-      // 支払額が商品価格より不足している場合
       playSound('wrong');
       showMessage('たりないよ！', '#d32f2f');
       document.getElementById('change-result-box').style.display = 'none';
     } else if (total === targetPayment) {
-      // ベストな支払額（最小お釣り）
       playSound('correct');
       const successMsg = (mode === "1") ? '🎉 ぴったり！' : '🎉 じょうずにできたね！';
       showMessage(successMsg, '#2e7d32');
 
       if (mode === "2") {
         const change = total - currentPrice;
-        document.getElementById('change-amount').textContent = `${change} えん`;
+        document.getElementById('change-amount').textContent = `${change} えn`;
         document.getElementById('change-result-box').style.display = 'block';
       } else {
         document.getElementById('change-result-box').style.display = 'none';
@@ -735,21 +802,18 @@
       document.getElementById('btn-next').style.display = 'inline-block';
 
     } else if (mode === "2" && total > targetPayment && total >= currentPrice) {
-      // モード②で買い物は成立しているが、お釣りをさらに少なくできる払い方がある場合
       playSound('good');
-      showMessage('⭕ かいものは できるよ！<br><span style="font-size:18px; color:#d97706;">でも、もっと おつりを すくなくできるよ？</span>', '#2563eb');
+      showMessage('⭕ かいものは できるよ！<br><span style="font-size:16px; color:#d97706;">でも、もっと おつりを すくなくできるよ？</span>', '#2563eb');
 
       const change = total - currentPrice;
       document.getElementById('change-amount').textContent = `${change} えん`;
       document.getElementById('change-result-box').style.display = 'block';
 
-      // 「もういちどチャレンジ」ボタンと「つぎへ」ボタンの両方を表示
       document.getElementById('btn-pay').style.display = 'none';
       document.getElementById('btn-retry').style.display = 'inline-block';
       document.getElementById('btn-next').style.display = 'inline-block';
 
     } else {
-      // モード①などで金額が多すぎる場合
       playSound('wrong');
       showMessage('おおいよ！', '#d32f2f');
       document.getElementById('change-result-box').style.display = 'none';
@@ -762,7 +826,15 @@
     msgEl.style.color = color;
   }
 
-  window.onload = startNewProblem;
+  window.onload = () => {
+    // 画面幅が小さい場合（768px未満）の初期選択を「たて」に設定
+    if (window.innerWidth < 768) {
+      document.getElementById('layout-select').value = 'portrait';
+    } else {
+      document.getElementById('layout-select').value = 'landscape';
+    }
+    startNewProblem();
+  };
 </script>
 </body>
 </html>
